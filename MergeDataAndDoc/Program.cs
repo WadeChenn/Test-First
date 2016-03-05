@@ -18,6 +18,7 @@ namespace MergeDataAndDoc
                 inputFileName = args[0];
                 outputFileName = args[1];
             }
+            Console.WriteLine();
 
             using (StreamReader inputFile = new StreamReader(inputFileName))
             using(StreamWriter outputFile = new StreamWriter(outputFileName))
