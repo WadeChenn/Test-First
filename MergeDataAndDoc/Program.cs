@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace MergeDataAndDoc
 {
     class Program
@@ -80,17 +81,20 @@ namespace MergeDataAndDoc
                    //nsole.Write(Data_List[0]);//test
                 }
                 string str0;
-                while ((line_Temp = TemplateFile.ReadLine()) != null)//讀出template.txt
+                n = 0;
+                for (int k = 0; k < 3; k++)
                 {
-                    string outputLine2 = line_Temp;
-                    //Console.WriteLine(outputLine2);
-                    Template_List = line_Temp.ToList();
-                   // Console.Write(Template_List[0]);//test
+                    while ((line_Temp = TemplateFile.ReadLine()) != null)//讀出template.txt
+                    {
+                        string outputLine2 = line_Temp;
+                        //Console.WriteLine(outputLine2);
+                        Template_List = line_Temp.ToList();
+                        // Console.Write(Template_List[0]);//test
 
-                   // Console.Write(中文姓名.GetLength(0));
-                    //*****處理字符串*****
-                    Result_List = Template_List;//將Template字符串保存到Result字符串中.
-                    for ( int i = 0; i < Result_List.Count(); i++)
+                        // Console.Write(中文姓名.GetLength(0));
+                        //*****處理字符串*****
+                        Result_List = Template_List;//將Template字符串保存到Result字符串中.
+                        for (int i = 0; i < Result_List.Count(); i++)
                         {
                             if (Result_List[i] == '$')
                             {
@@ -98,46 +102,52 @@ namespace MergeDataAndDoc
                                 {
                                     case '中':
                                         Result_List.RemoveRange(i, 7);
-                                        for (int j = 0; j<10; j++)
+                                        for (int j = 0; j < 10; j++)
                                         {
-                                            if (中文姓名[0, j]!='\0')
-                                            Result_List.Insert(i + j, 中文姓名[0, j]);//將姓名插入list中
-                                            
+                                            if (中文姓名[n, j] != '\0')
+                                                Result_List.Insert(i + j, 中文姓名[n, j]);//將姓名插入list中
+
                                         }
-                                            break;
+                                        break;
                                     case '身':
                                         Result_List.RemoveRange(i, 8);
                                         for (int j = 0; j < 10; j++)
                                         {
-                                            if (身份證字號[0, j] != '\0')
-                                                Result_List.Insert(i+j, 身份證字號[0,j]);//將身份證號碼插入list中
+                                            if (身份證字號[n, j] != '\0')
+                                                Result_List.Insert(i + j, 身份證字號[n, j]);//將身份證號碼插入list中
 
                                         }
-                                        
-                                        
+
+
                                         break;
                                     case '年':
                                         Result_List.RemoveRange(i, 5);
                                         for (int j = 0; j < 2; j++)
                                         {
                                             if (年數[0, j] != '\0')
-                                                Result_List.Insert(i+j, 年數[0,j]);//將年數插入到list中
+                                                Result_List.Insert(i + j, 年數[n, j]);//將年數插入到list中
 
                                         }
-                                        
-                                        
+
+
                                         break;
                                 }
 
                             }
                         }
 
-                    for (int i = 0; i < Result_List.Count(); i++)
-                    {
-                        Console.Write(Result_List[i]);
-                        ResultFile.Write(Result_List[i]);//輸出到result.txt文件
+                        for (int i = 0; i < Result_List.Count(); i++)
+                        {
+                            Console.Write(Result_List[i]);
+                            ResultFile.Write(Result_List[i]);//輸出到result.txt文件
+                        }
+                        Console.WriteLine();
+                        ResultFile.WriteLine();
+                       
                     }
-                    Console.WriteLine();
+                    TemplateFile.BaseStream.Seek(0, SeekOrigin.Begin);
+                    //StreamReader.
+                    n++;
                 }
             }
             //string str_ = "123陳燁煒";
