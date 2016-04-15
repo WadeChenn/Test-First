@@ -128,7 +128,8 @@ namespace MergeDataAndDoc
                     Console.WriteLine();
                     ResultFile.WriteLine();
                 }
-                TemplateFile.BaseStream.Seek(0, SeekOrigin.Begin);
+
+                //TemplateFile.BaseStream.Seek(0, SeekOrigin.Begin);
                 n++;
             }
         }
